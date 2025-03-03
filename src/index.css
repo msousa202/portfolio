@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-black text-white;
+}
+
+/* Stars animation */
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0, 0, 0, 0)),
+                    radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0, 0, 0, 0)),
+                    radial-gradient(2px 2px at 50px 160px, #ffffff, rgba(0, 0, 0, 0)),
+                    radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0, 0, 0, 0)),
+                    radial-gradient(2px 2px at 130px 80px, #ffffff, rgba(0, 0, 0, 0)),
+                    radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0, 0, 0, 0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: stars 100s linear infinite;
+  opacity: 0.3;
+}
+
+.stars2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: radial-gradient(1px 1px at 100px 50px, #ffffff, rgba(0, 0, 0, 0)),
+                    radial-gradient(1px 1px at 200px 150px, #ffffff, rgba(0, 0, 0, 0)),
+                    radial-gradient(1px 1px at 300px 220px, #ffffff, rgba(0, 0, 0, 0)),
+                    radial-gradient(1px 1px at 400px 100px, #ffffff, rgba(0, 0, 0, 0));
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  animation: stars 150s linear infinite;
+  opacity: 0.3;
+}
+
+.stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: radial-gradient(1px 1px at 50px 300px, #ffffff, rgba(0, 0, 0, 0)),
+                    radial-gradient(1px 1px at 150px 400px, #ffffff, rgba(0, 0, 0, 0)),
+                    radial-gradient(1px 1px at 250px 500px, #ffffff, rgba(0, 0, 0, 0)),
+                    radial-gradient(1px 1px at 350px 350px, #ffffff, rgba(0, 0, 0, 0));
+  background-repeat: repeat;
+  background-size: 500px 500px;
+  animation: stars 200s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes stars {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-1000px);
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.8);
+}
