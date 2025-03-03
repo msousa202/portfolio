@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Database, LineChart, PieChart } from 'lucide-react';
+import profileImage from '../assets/profile.png';
 
 const Hero: React.FC = () => {
   return (
@@ -41,13 +42,15 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative mx-auto lg:mx-0 w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-purple-500/30"
+            className="relative flex justify-center w-full"
           >
-            <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" 
-              alt="Mário Sousa" 
-              className="w-full h-full object-cover"
-            />
+            <div className="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-purple-500/30">
+              <img 
+                src={profileImage}
+                alt="Mário Sousa" 
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
           </motion.div>
         </div>
 
