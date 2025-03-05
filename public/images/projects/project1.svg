@@ -1,0 +1,7 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#1e293b" />
+  <text x="400" y="200" font-family="Arial" font-size="32" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">Data Analysis Project</text>
+  <rect x="50" y="250" width="700" height="20" fill="#7c3aed" rx="5" ry="5" opacity="0.3" />
+  <rect x="50" y="250" width="500" height="20" fill="#7c3aed" rx="5" ry="5" />
+  <text x="400" y="300" font-family="Arial" font-size="18" fill="#94a3b8" text-anchor="middle">Python • Pandas • Matplotlib</text>
+</svg>

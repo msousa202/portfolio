@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import emailjs from '@emailjs/browser';
 
 interface ContactFormData {
   name: string;
@@ -20,6 +22,49 @@ const Contact: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
 
+  // EmailJS configuration from environment variables
+  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+  
+  const form = useRef<HTMLFormElement>(null);
+  
+  // Initialize EmailJS and listen for service request events
+  useEffect(() => {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    
+    // Check URL for service parameter
+    const checkUrlForService = () => {
+      const hash = window.location.hash;
+      if (hash.includes('?service=')) {
+        const service = decodeURIComponent(hash.split('?service=')[1]);
+        setFormData(prev => ({
+          ...prev,
+          subject: `Service Request: ${service}`
+        }));
+      }
+    };
+    
+    // Initial check
+    checkUrlForService();
+    
+    // Listen for service requested events
+    const handleServiceRequested = (event: CustomEvent<{ service: string }>) => {
+      setFormData(prev => ({
+        ...prev,
+        subject: `Service Request: ${event.detail.service}`
+      }));
+    };
+    
+    window.addEventListener('serviceRequested', handleServiceRequested as EventListener);
+    window.addEventListener('hashchange', checkUrlForService);
+    
+    return () => {
+      window.removeEventListener('serviceRequested', handleServiceRequested as EventListener);
+      window.removeEventListener('hashchange', checkUrlForService);
+    };
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -32,9 +77,34 @@ const Contact: React.FC = () => {
     }
 
     try {
-      // Here you would typically send the email using your preferred method
-      // For now, we'll simulate a successful submission
-      await new Promise(resolve => setTimeout(resolve, 800));
+      // 1. Send email notification using EmailJS
+      if (form.current) {
+        await emailjs.sendForm(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          form.current,
+          EMAILJS_PUBLIC_KEY
+        );
+      } else {
+        throw new Error('Form reference is null');
+      }
+      
+      // 2. Try to insert data into Supabase contact_messages table
+      try {
+        await supabase
+          .from('contact_messages')
+          .insert([
+            { 
+              name: formData.name,
+              email: formData.email,
+              subject: formData.subject,
+              message: formData.message
+            }
+          ]);
+      } catch (dbErr) {
+        // Silently handle database errors - email was still sent
+      }
+      
       setIsSuccess(true);
       setFormData({
         name: '',
@@ -43,8 +113,11 @@ const Contact: React.FC = () => {
         message: ''
       });
     } catch (err) {
-      console.error('Error sending message:', err);
-      setError('Failed to send message. Please try again later.');
+      if (err instanceof Error) {
+        setError(`Failed to send message: ${err.message}`);
+      } else {
+        setError('Failed to send message. Please try again later.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -52,14 +125,31 @@ const Contact: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
+  
+  const clearForm = useCallback(() => {
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    });
+    setError('');
+    
+    // Also clear the URL parameter
+    if (window.location.hash.includes('?')) {
+      const baseHash = window.location.hash.split('?')[0];
+      window.history.pushState({}, '', baseHash);
+    }
+  }, []);
 
   return (
-    <section id="contact" className="min-h-screen py-24 flex items-center">
+    <section id="contact" className="min-h-screen pt-0 pb-24 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
@@ -95,7 +185,7 @@ const Contact: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form ref={form} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
@@ -163,20 +253,30 @@ const Contact: React.FC = () => {
 
                 {error && <p className="text-sm text-red-400">{error}</p>}
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center"
-                >
-                  {isSubmitting ? (
-                    <span>Sending...</span>
-                  ) : (
-                    <>
-                      <span>Send Message</span>
-                      <Send size={18} className="ml-2" />
-                    </>
-                  )}
-                </button>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center"
+                  >
+                    {isSubmitting ? (
+                      <span>Sending...</span>
+                    ) : (
+                      <>
+                        <span>Send Message</span>
+                        <Send size={18} className="ml-2" />
+                      </>
+                    )}
+                  </button>
+                  
+                  <button
+                    type="button"
+                    onClick={clearForm}
+                    className="w-full sm:w-auto px-6 py-3 bg-gray-800 text-gray-300 font-medium rounded-lg hover:bg-gray-700 transition-colors"
+                  >
+                    Clear Form
+                  </button>
+                </div>
               </form>
             )}
           </motion.div>
