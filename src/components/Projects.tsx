@@ -93,7 +93,7 @@ The pipeline successfully processes over 1 million transactions daily with 99.9%
     {
       id: '3',
       title: 'BI Dashboard Project',
-      description: 'Interactive business intelligence dashboard for executive insights',
+      description: 'Interactive BI dashboard for executive insights',
       date: 'May 2024',
       readmeContent: `# BI Dashboard Project
 
