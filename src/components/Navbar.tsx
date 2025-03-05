@@ -51,6 +51,12 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
                 Path
               </button>
               <button
+                onClick={() => handleNavClick('projects')}
+                className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              >
+                Projects
+              </button>
+              <button
                 onClick={() => handleNavClick('contact')}
                 className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
@@ -84,6 +90,12 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
               className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left"
             >
               Path
+            </button>
+            <button
+              onClick={() => handleNavClick('projects')}
+              className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+            >
+              Projects
             </button>
             <button
               onClick={() => handleNavClick('contact')}

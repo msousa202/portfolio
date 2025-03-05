@@ -9,8 +9,8 @@ const isMockClient = !import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// Add a console warning if using mock client
-if (isMockClient) {
+// In production, we don't want to show warnings
+if (isMockClient && import.meta.env.MODE !== 'production') {
   console.warn(
     'Supabase client initialized with placeholder values. The newsletter subscription feature will not work. ' +
     'Please set the VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables in a .env file.'

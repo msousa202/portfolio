@@ -1,0 +1,41 @@
+# Netlify configuration file
+
+[build]
+  # Directory to publish (relative to root of your repo)
+  publish = "dist"
+  
+  # Default build command
+  command = "npm run build"
+
+# Redirects and headers
+[[redirects]]
+  # SPA fallback
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment variable configuration
+[build.environment]
+  # Production mode
+  NODE_ENV = "production"
+
+# Cache control for assets
+[[headers]]
+  # Define which paths this specific [[headers]] block will cover
+  for = "/assets/*"
+  
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache control for HTML and JSON
+[[headers]]
+  for = "/*.html"
+  
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.json"
+  
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
