@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks: {
             // Split vendor code into separate chunks
-            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+            'react-vendor': ['react', 'react-dom'],
             'ui-vendor': ['framer-motion', 'lucide-react'],
             'supabase-vendor': ['@supabase/supabase-js'],
           },

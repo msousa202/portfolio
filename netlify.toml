@@ -5,7 +5,7 @@
   publish = "dist"
   
   # Default build command
-  command = "npm run build"
+  command = "npm run build:prod"
 
 # Redirects and headers
 [[redirects]]
@@ -18,6 +18,10 @@
 [build.environment]
   # Production mode
   NODE_ENV = "production"
+  # Ensure dev dependencies are installed
+  NPM_FLAGS = "--include=dev"
+  # Prevent build from failing on warnings
+  CI = "false"
 
 # Cache control for assets
 [[headers]]

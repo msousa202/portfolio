@@ -79,25 +79,75 @@ This will:
 - Output the build to the `dist` directory
 - Provide statistics about the build
 
-### 3. Deploy your website
+### 3. Test Netlify Deployment Locally
+
+Before deploying to Netlify, you can test the build process locally:
+
+```bash
+npm run netlify:test
+```
+
+This will:
+- Simulate the Netlify environment
+- Check for required configuration files
+- Run the build command specified in netlify.toml
+- Report any errors that might occur during deployment
+
+### 4. Deploy your website
 
 You can deploy your website to any of the following services:
 
-- **Netlify**: Easy deployment with continuous integration
+- **Netlify**: Easy deployment with continuous integration (recommended)
 - **Vercel**: Great for React applications with serverless functions
 - **GitHub Pages**: Free hosting for static websites
 - **Cloudflare Pages**: Fast global CDN with free hosting
 
 #### Deploying to Netlify
 
+**Option 1: Using the Deployment Helper Script (Recommended)**
+
+This project includes a helper script that automates the Netlify deployment process:
+
+```bash
+npm run netlify:deploy
+```
+
+This script will:
+1. Check if Netlify CLI is installed and install it if needed
+2. Verify your Netlify login status and prompt you to log in if needed
+3. Build your project for production
+4. Guide you through deploying to Netlify with interactive prompts
+5. Remind you to set up environment variables in the Netlify dashboard
+
+**Option 2: Manual Deployment via Netlify Dashboard**
+
 1. Create a Netlify account at [netlify.com](https://www.netlify.com)
-2. Install the Netlify CLI:
+2. Push your code to a Git repository (GitHub, GitLab, or Bitbucket)
+3. In the Netlify dashboard, click "New site from Git"
+4. Choose your Git provider and select your repository
+5. Netlify will automatically detect your build settings from netlify.toml
+6. Add your environment variables in the Netlify dashboard:
+   - Go to Site settings > Build & deploy > Environment
+   - Add all variables from your .env file
+7. Click "Deploy site"
+
+**Option 3: Manual Deployment via Netlify CLI**
+
+1. Install the Netlify CLI:
    ```bash
    npm install -g netlify-cli
    ```
-3. Deploy your site:
+2. Login to your Netlify account:
    ```bash
-   netlify deploy
+   netlify login
+   ```
+3. Initialize your site:
+   ```bash
+   netlify init
+   ```
+4. Deploy your site:
+   ```bash
+   netlify deploy --prod
    ```
 
 #### Deploying to Vercel
