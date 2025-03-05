@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 const TermsOfService: React.FC = () => {
@@ -9,20 +9,22 @@ const TermsOfService: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12 relative"
+          className="mb-12"
         >
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent('toggleTerms', { detail: { show: false } }))}
-            className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors flex items-center"
-            aria-label="Back to main content"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            <span className="hidden sm:inline">Back</span>
-          </button>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Terms of Service</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <div className="flex items-center mb-4">
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('toggleTerms', { detail: { show: false } }))}
+              className="text-gray-400 hover:text-white transition-colors flex items-center mr-4"
+              aria-label="Back to main content"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              <span className="hidden sm:inline">Back</span>
+            </button>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Terms of Service</h2>
+          </div>
+          <p className="text-gray-400 max-w-2xl">
             Please read these terms carefully before using our services.
           </p>
         </motion.div>

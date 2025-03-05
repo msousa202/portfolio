@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
             <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-purple-500/30">
               <img 
                 src={profileImage}
-                alt="Mário" 
+                alt="" 
                 className="w-full h-full object-cover object-center"
               />
             </div>

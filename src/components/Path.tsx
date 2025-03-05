@@ -23,10 +23,10 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ title, university, universi
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.6, delay: index * 0.2 }}
-      className={`flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col md:gap-8 mb-12`}
+      className={`flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col md:gap-8 mb-12 relative`}
     >
-      <div className="md:w-1/2 flex flex-col items-center md:items-end md:pr-8 md:text-right">
-        <div className={`${index % 2 === 0 ? 'md:text-right' : 'md:text-left'} text-left`}>
+      <div className="md:w-1/2 flex flex-col md:pr-8">
+        <div className={`${index % 2 === 0 ? 'md:text-right' : 'md:text-left'} text-left pl-10 md:pl-0`}>
           <h3 className="text-xl font-bold text-white">{title}</h3>
           {university && (
             <p className="text-blue-400 font-medium mb-1">
@@ -48,13 +48,19 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ title, university, universi
         </div>
       </div>
       
+      {/* Timeline dot and line for desktop */}
       <div className="hidden md:flex flex-col items-center">
         <div className="w-4 h-4 bg-purple-500 rounded-full z-10"></div>
         <div className="w-1 bg-purple-500/30 h-full -mt-2"></div>
       </div>
       
-        <div className="md:w-1/2 md:pl-8 mt-4 md:mt-0">
-          <div className={`bg-gray-900/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-purple-500/20 ${index % 2 === 0 ? 'md:text-left' : 'md:text-left'} text-left`}>
+      {/* Timeline dot for mobile */}
+      <div className="md:hidden absolute left-4 top-0 flex items-center">
+        <div className="w-3 h-3 bg-purple-500 rounded-full z-10"></div>
+      </div>
+      
+      <div className="md:w-1/2 md:pl-8 mt-4 md:mt-0 relative pl-10 md:pl-0">
+        <div className={`bg-gray-900/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-purple-500/20 text-left`}>
           <p className="text-gray-300 whitespace-pre-line">{description}</p>
         </div>
       </div>
