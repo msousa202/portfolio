@@ -38,10 +38,42 @@ try {
   process.exit(1);
 }
 
+// Check if Vite is installed
+try {
+  console.log('🔍 Checking for Vite...');
+  execSync('npx vite --version', { stdio: 'pipe' });
+  console.log('✅ Vite is installed.');
+} catch (error) {
+  console.log('⚠️ Vite not found. Installing Vite...');
+  try {
+    execSync('npm install vite --save-dev', { stdio: 'inherit' });
+    console.log('✅ Vite installed successfully.');
+  } catch (installError) {
+    console.error('❌ Failed to install Vite:', installError.message);
+    process.exit(1);
+  }
+}
+
+// Check if Terser is installed (required for minification)
+try {
+  console.log('🔍 Checking for Terser...');
+  execSync('npx terser --version', { stdio: 'pipe' });
+  console.log('✅ Terser is installed.');
+} catch (error) {
+  console.log('⚠️ Terser not found. Installing Terser...');
+  try {
+    execSync('npm install terser --save-dev', { stdio: 'inherit' });
+    console.log('✅ Terser installed successfully.');
+  } catch (installError) {
+    console.error('❌ Failed to install Terser:', installError.message);
+    process.exit(1);
+  }
+}
+
 // Run production build
 try {
   console.log('🔨 Building for production...');
-  execSync('npm run build', { stdio: 'inherit' });
+  execSync('npx vite build', { stdio: 'inherit' });
   console.log('✅ Build completed successfully!');
 } catch (error) {
   console.error('❌ Build failed:', error.message);
