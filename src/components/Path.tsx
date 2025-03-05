@@ -53,8 +53,8 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ title, university, universi
         <div className="w-1 bg-purple-500/30 h-full -mt-2"></div>
       </div>
       
-      <div className="md:w-1/2 md:pl-8 mt-4 md:mt-0">
-        <div className={`bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-purple-500/20 ${index % 2 === 0 ? 'md:text-left' : 'md:text-left'} text-left`}>
+        <div className="md:w-1/2 md:pl-8 mt-4 md:mt-0">
+          <div className={`bg-gray-900/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-purple-500/20 ${index % 2 === 0 ? 'md:text-left' : 'md:text-left'} text-left`}>
           <p className="text-gray-300 whitespace-pre-line">{description}</p>
         </div>
       </div>

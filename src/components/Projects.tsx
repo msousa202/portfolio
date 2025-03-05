@@ -165,7 +165,7 @@ The dashboard is now used by 50+ executives daily, leading to faster decision-ma
           <div className="absolute h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 top-1/2 left-0 right-0 transform -translate-y-1/2 rounded-full" />
 
           {/* Projects timeline */}
-          <div className="relative flex justify-between items-center gap-4 md:gap-8 overflow-x-auto pb-32 px-4 snap-x snap-mandatory">
+          <div className="relative flex justify-between items-center gap-4 md:gap-8 overflow-x-auto pb-32 px-4 snap-x snap-mandatory -mx-4 px-8 md:px-4">
             {projects.map((project) => (
               <motion.div
                 key={project.id}
