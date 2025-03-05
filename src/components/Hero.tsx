@@ -14,60 +14,64 @@ const Hero: React.FC = () => {
   return (
     <section id="home" className="min-h-screen pt-16 flex flex-col justify-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Reordered grid for mobile - image first, then content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          {/* Profile Image - Shows first on mobile */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative flex justify-center w-full order-1 lg:order-2 mb-8 lg:mb-0"
+          >
+            <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-purple-500/30">
+              <img 
+                src={profileImage}
+                alt="Mário" 
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+          </motion.div>
+          
+          {/* Text Content - Shows second on mobile */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            className="order-2 lg:order-1"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 text-center lg:text-left">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
                 Mário Sousa
               </span>
             </h1>
-            <h2 className="text-xl md:text-2xl text-gray-300 mb-6">
+            <h2 className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 md:mb-6 text-center lg:text-left">
               Data Analyst | Business Intelligence Enthusiast
             </h2>
-            <p className="text-gray-400 mb-8 max-w-lg">
+            <p className="text-gray-400 mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0 text-center lg:text-left text-sm sm:text-base">
               Transforming complex data into actionable insights. Specializing in data analysis, 
               ETL pipeline development, and business intelligence solutions that drive strategic decisions.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <motion.button
                 onClick={scrollToProjects}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-lg
-                           flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                className="px-6 sm:px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-lg
+                           flex items-center justify-center gap-2 hover:opacity-90 transition-opacity text-sm sm:text-base"
               >
                 View Projects
-                <ArrowRight size={20} />
+                <ArrowRight size={18} className="sm:w-5 sm:h-5" />
               </motion.button>
               
               <motion.a
                 href="#contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 bg-gray-800 text-white font-medium rounded-lg
-                           hover:bg-gray-700 transition-colors"
+                className="px-6 sm:px-8 py-3 bg-gray-800 text-white font-medium rounded-lg
+                           hover:bg-gray-700 transition-colors text-sm sm:text-base"
               >
                 Get in Touch
               </motion.a>
-            </div>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative flex justify-center w-full"
-          >
-            <div className="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-purple-500/30">
-              <img 
-                src={profileImage}
-                alt="Mário Sousa" 
-                className="w-full h-full object-cover object-center"
-              />
             </div>
           </motion.div>
         </div>

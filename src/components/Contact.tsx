@@ -168,7 +168,7 @@ const Contact: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-purple-500/20"
+            className="bg-gray-900/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-purple-500/20"
           >
             {isSuccess ? (
               <div className="text-center py-6">
@@ -252,6 +252,23 @@ const Contact: React.FC = () => {
                 </div>
 
                 {error && <p className="text-sm text-red-400">{error}</p>}
+
+                <div className="mb-4 text-sm text-gray-400">
+                  By submitting this form, you agree to our <button 
+                    type="button"
+                    onClick={() => {
+                      // Use window.location to navigate to Terms of Service
+                      const currentHash = window.location.hash;
+                      // Store current hash to return after viewing terms
+                      sessionStorage.setItem('returnTo', currentHash);
+                      // Set showTerms state in App component
+                      window.dispatchEvent(new CustomEvent('toggleTerms', { detail: { show: true } }));
+                    }}
+                    className="text-purple-400 hover:text-purple-300 underline transition-colors"
+                  >
+                    Terms of Service
+                  </button> regarding how your data is stored and processed.
+                </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button

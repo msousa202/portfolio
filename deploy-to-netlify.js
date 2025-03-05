@@ -108,3 +108,4 @@ rl.question('\n🌐 Do you want to deploy to Netlify now? (y/n): ', (answer) => 
     console.log('npx netlify deploy --prod');
     rl.close();
   }
+});

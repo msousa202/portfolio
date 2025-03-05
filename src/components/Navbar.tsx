@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import logoImage from '../assets/Logo.png';
 
 interface NavbarProps {
   scrollToSection: (sectionId: string) => void;
@@ -32,8 +33,8 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <span className="text-white text-xl font-bold">Sousa</span>
+            <div className="flex-shrink-0 flex items-center">
+              <span className="text-white text-xl font-bold"></span>
             </div>
           </div>
           <div className="hidden md:block">
@@ -79,6 +80,14 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
       {isOpen && (
         <div className="md:hidden bg-black/90 backdrop-blur-md">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <div className="flex items-center px-3 py-2 mb-3">
+              <img 
+                src={logoImage} 
+                alt="Logo" 
+                className="h-10 w-auto mr-2 rounded-lg"
+              />
+              <span className="text-white text-lg font-bold">Mário</span>
+            </div>
             <button
               onClick={() => handleNavClick('home')}
               className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left"
