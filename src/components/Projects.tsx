@@ -35,66 +35,68 @@ const Projects: React.FC = () => {
   const projects: Project[] = [
     {
       id: '1',
-      title: 'Data Analysis Project',
-      description: 'Exploratory data analysis on customer behavior patterns',
-      date: 'January 2024',
+      title: 'Smart City Project',
+      description: 'Exploratory data analysis on traffic behavior patterns.',
+      date: 'April 2024',
       readmeContent: `# Data Analysis Project
 
 ## Overview
-This project involves comprehensive exploratory data analysis on customer behavior patterns for a retail company. The analysis helped identify key purchasing trends and customer segments.
+This project involves comprehensive exploratory data analysis on traffic patterns in the city of Lisbon. The analysis helped identify key pendular movements, at entry/exit of the city.
 
 ## Key Features
-- Data cleaning and preprocessing using Pandas
-- Statistical analysis to identify patterns and outliers
-- Visualization of customer segments and purchasing behaviors
-- Predictive modeling to forecast future trends
+- Data cleaning and preprocessing using Pandas.
+- Identify patterns and outliers using waze data.
+- Visualization of traffic entensity at x,y hours.
+- Predictive modeling to forecast future trends.
 
 ## Technologies Used
-- Python for data processing and analysis
-- Pandas for data manipulation
-- Matplotlib and Seaborn for visualization
-- Scikit-learn for predictive modeling
+- Python for data processing and analysis.
+- Pandas for data manipulation.
+- SQL for database connection.
+- Google Colab for predictive modeling.
+- Power BI for data visualization and insights.
 
 ## Results
 The analysis revealed several key customer segments and purchasing patterns that were previously unknown. These insights led to a 15% increase in targeted marketing effectiveness.`,
       imageUrl: '/images/projects/project1.svg',
-      technologies: ['Python', 'Pandas', 'Matplotlib', 'Scikit-learn'],
+      technologies: ['Python', 'SQL', 'PowerBI', 'Microsoft Fabric'],
       githubUrl: 'https://github.com/mario-sousa/data-analysis-project'
     },
     {
       id: '2',
       title: 'ETL Pipeline Project',
-      description: 'Automated data pipeline for processing financial data',
-      date: 'March 2024',
+      description: 'Automated data pipeline for processing football data',
+      date: 'May 2024',
       readmeContent: `# ETL Pipeline Project
 
 ## Overview
-This project implements an automated ETL (Extract, Transform, Load) pipeline for processing financial transaction data from multiple sources into a centralized data warehouse.
+This project implements an automated ETL (Extract, Transform, Load) pipeline for processing football statistical data from Kaggle into a centralized data warehouse.
 
 ## Key Features
-- Automated data extraction from various sources (APIs, databases, CSV files)
-- Data transformation including cleaning, normalization, and enrichment
+- Automated data extraction from various sources (APIs, Kaggle, CSV files).
+- Data transformation including cleaning, normalization, and enrichment.
+- Queries for data warehouse quality assurance.
 - Scheduled data loading into a data warehouse
-- Monitoring and error handling mechanisms
+- Data visualization.
 
 ## Technologies Used
-- Python for core processing logic
-- Apache Airflow for workflow orchestration
-- SQL for database operations
-- Docker for containerization
+- Microsoft Fabric for core processing logic
+- Pyspark & SQL for workflow orchestration
+- Kaggle APIs for database connection
+- Python for data cleaning and normalization
 
 ## Results
-The pipeline successfully processes over 1 million transactions daily with 99.9% reliability, reducing manual data processing time by 85%.`,
+The pipeline successfully processes over 250 thousand football statistics daily with 99.9% reliability, reducing manual data processing time by 85%.`,
       imageUrl: '/images/projects/project2.svg',
-      technologies: ['Python', 'SQL', 'Apache Airflow', 'Docker'],
+      technologies: ['Python', 'SQL', 'Pyspark', 'Microsoft Fabric', 'PowerBI'],
       githubUrl: 'https://github.com/mario-sousa/etl-pipeline-project',
       demoUrl: 'https://etl-pipeline-demo.example.com'
     },
     {
-      id: '3',
-      title: 'BI Dashboard Project',
+      id: '3', /* TODO: Update Project, for something created by me, could be even this website.*/
+      title: 'Full Stack Web App',
       description: 'Interactive BI dashboard for executive insights',
-      date: 'May 2024',
+      date: 'March 2025',
       readmeContent: `# BI Dashboard Project
 
 ## Overview
@@ -140,13 +142,13 @@ The dashboard is now used by 50+ executives daily, leading to faster decision-ma
   };
 
   return (
-    <section id="projects" className="min-h-screen pt-24 pb-0">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="min-h-screen pt-4 pb-0">
+      <div className="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Projects</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">

@@ -149,7 +149,7 @@ const Contact: React.FC = () => {
   }, []);
 
   return (
-    <section id="contact" className="min-h-screen pt-0 pb-24 flex items-center">
+    <section id="contact" className="min-h-screen pt-0 pb-4 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
