@@ -86,7 +86,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
                 alt="Logo" 
                 className="h-10 w-auto mr-2 rounded-lg"
               />
-              <span className="text-white text-lg font-bold">Mário</span>
+              <span className="text-white text-lg font-bold"></span>
             </div>
             <button
               onClick={() => handleNavClick('home')}
