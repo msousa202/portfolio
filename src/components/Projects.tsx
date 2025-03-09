@@ -93,32 +93,35 @@ The pipeline successfully processes over 250 thousand football statistics daily 
       demoUrl: 'https://etl-pipeline-demo.example.com'
     },
     {
-      id: '3', /* TODO: Update Project, for something created by me, could be even this website.*/
-      title: 'Full Stack Web App',
-      description: 'Interactive BI dashboard for executive insights',
-      date: 'March 2025',
-      readmeContent: `# BI Dashboard Project
+      id: '3',
+      title: 'Portfolio Website',
+      description: 'Modern React-based portfolio with animations and responsive design',
+      date: 'June 2024',
+      readmeContent: `# Portfolio Website Project
 
 ## Overview
-This project delivers an interactive business intelligence dashboard providing real-time insights for executive decision-making. The dashboard consolidates data from multiple business systems into actionable visualizations.
+This project is a modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. It showcases my skills, projects, and professional experience with smooth animations and intuitive navigation.
 
 ## Key Features
-- Real-time data integration from multiple sources
-- Interactive visualizations with drill-down capabilities
-- Customizable KPI tracking and alerts
-- Mobile-responsive design for on-the-go access
+- Responsive design that works on all devices
+- Animated UI elements using Framer Motion
+- Dark mode design with gradient accents
+- Project showcase with detailed modal views
+- Contact form integration
 
 ## Technologies Used
-- Power BI for dashboard development
-- DAX for advanced calculations
-- SQL for data querying
-- Azure for cloud hosting
+- React for component-based architecture
+- TypeScript for type safety
+- Tailwind CSS for styling
+- Framer Motion for animations
+- Vercel for deployment
 
 ## Results
-The dashboard is now used by 50+ executives daily, leading to faster decision-making and a measurable 12% improvement in operational efficiency.`,
-      imageUrl: '/images/projects/project3.svg',
-      technologies: ['Power BI', 'DAX', 'SQL', 'Azure'],
-      demoUrl: 'https://bi-dashboard-demo.example.com'
+This portfolio site serves as both a demonstration of my front-end development skills and a platform to showcase my data analytics and business intelligence projects.`,
+      imageUrl: '/images/projects/portfolio.svg',
+      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+      githubUrl: 'https://github.com/mario-sousa/portfolio-website',
+      demoUrl: 'https://your-portfolio-url.com'
     }
   ];
 
@@ -142,7 +145,7 @@ The dashboard is now used by 50+ executives daily, leading to faster decision-ma
   };
 
   return (
-    <section id="projects" className="min-h-screen pt-4 pb-0">
+    <section id="projects" className="py-16">
       <div className="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}

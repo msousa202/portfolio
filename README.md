@@ -1,14 +1,31 @@
-# Portfolio Website
+# Mário Sousa - Portfolio Website
 
-A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS.
+A modern, responsive portfolio website showcasing data analysis and business intelligence projects. Built with React, TypeScript, and Tailwind CSS, this portfolio features an elegant design with smooth animations and interactive elements.
 
-## Features
+![Portfolio Preview](src/assets/profile.png)
 
-- **Interactive Project Showcase**: Horizontal timeline with project details in modal popups
-- **Service Request System**: Hover over services to request them directly through the contact form
-- **Contact Form**: Integrated with Supabase for storage and EmailJS for notifications
-- **Responsive Design**: Looks great on all devices from mobile to desktop
-- **Modern UI**: Sleek animations and transitions using Framer Motion
+## Overview
+
+This portfolio website serves as a professional showcase for Mário Sousa, a Data Analyst and Business Intelligence specialist. The site features:
+
+- **Professional Profile**: Highlighting skills and services in data analysis, ETL pipelines, and business intelligence
+- **Interactive Project Showcase**: Horizontal timeline with detailed project modals displaying README content
+- **Service Request System**: Interactive service cards with direct contact form integration
+- **Contact Form**: Dual-storage system using Supabase for data persistence and EmailJS for notifications
+- **Responsive Design**: Fully responsive layout optimized for all devices from mobile to desktop
+- **Modern UI**: Sleek animations and transitions powered by Framer Motion
+
+## Tech Stack
+
+- **Frontend Framework**: React with TypeScript
+- **Styling**: Tailwind CSS for utility-first styling
+- **Animations**: Framer Motion for smooth transitions and effects
+- **Icons**: Lucide React for modern, customizable icons
+- **Backend Integration**: 
+  - Supabase for database storage (contact form submissions)
+  - EmailJS for sending email notifications
+- **Build Tool**: Vite for fast development and optimized production builds
+- **Deployment**: Configured for Netlify with custom deployment scripts
 
 ## Getting Started
 
@@ -16,13 +33,15 @@ A modern, responsive portfolio website built with React, TypeScript, and Tailwin
 
 - Node.js (v16 or higher)
 - npm or yarn
+- Supabase account (for database functionality)
+- EmailJS account (for email notifications)
 
 ### Installation
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/portfolio-website.git
-   cd portfolio-website
+   git clone https://github.com/mario-sousa/portfolio-1.git
+   cd portfolio-1
    ```
 
 2. Install dependencies
@@ -34,7 +53,7 @@ A modern, responsive portfolio website built with React, TypeScript, and Tailwin
 
 3. Set up environment variables
    - Copy `.env.example` to `.env`
-   - Fill in your Supabase and EmailJS credentials
+   - Fill in your Supabase and EmailJS credentials (see Environment Variables section)
 
 4. Start the development server
    ```bash
@@ -42,6 +61,36 @@ A modern, responsive portfolio website built with React, TypeScript, and Tailwin
    # or
    yarn dev
    ```
+
+5. Open your browser and navigate to `http://localhost:5173` (or the port shown in your terminal)
+
+## Project Structure
+
+```
+portfolio-1/
+├── public/                  # Static assets
+│   ├── images/              # Project images and icons
+│   └── ...
+├── src/
+│   ├── assets/              # Local assets (profile picture, logo)
+│   ├── components/          # React components
+│   │   ├── Background.tsx   # Animated background effect
+│   │   ├── Contact.tsx      # Contact form with Supabase/EmailJS integration
+│   │   ├── Hero.tsx         # Main landing section with services
+│   │   ├── Navbar.tsx       # Navigation component
+│   │   ├── Path.tsx         # Career/education path section
+│   │   ├── ProjectModal.tsx # Modal for displaying project details
+│   │   ├── Projects.tsx     # Interactive project timeline
+│   │   └── ...
+│   ├── lib/                 # Utility libraries
+│   │   └── supabase.ts      # Supabase client configuration
+│   ├── App.tsx              # Main application component
+│   └── main.tsx             # Application entry point
+├── supabase/
+│   └── migrations/          # Database schema migrations
+├── .env.example             # Example environment variables
+└── ...                      # Configuration files
+```
 
 ## Environment Variables
 
@@ -58,140 +107,158 @@ VITE_EMAILJS_TEMPLATE_ID=your-emailjs-template-id
 VITE_EMAILJS_PUBLIC_KEY=your-emailjs-public-key
 ```
 
-## Preparing for Production
+### Setting Up Supabase
 
-### 1. Clean up your code
+1. Create a Supabase account at [supabase.com](https://supabase.com)
+2. Create a new project
+3. Run the migration script in `supabase/migrations/` or manually create:
+   - A `subscribers` table for newsletter subscriptions
+   - A `contact_messages` table for storing contact form submissions
+4. Copy your project URL and anon key to the `.env` file
 
-- Remove any console.log statements (the production build will do this automatically)
-- Ensure all environment variables are set correctly
+### Setting Up EmailJS
 
-### 2. Build for production
+1. Create an EmailJS account at [emailjs.com](https://www.emailjs.com)
+2. Create an email service and template
+3. Copy your service ID, template ID, and public key to the `.env` file
+
+## Development Workflow
+
+### Local Development
 
 ```bash
-npm run build:prod
-# or
-yarn build:prod
+# Start development server
+npm run dev
+
+# Lint your code
+npm run lint
 ```
 
-This will:
+### Production Build
+
+```bash
+# Standard production build
+npm run build
+
+# Enhanced production build with environment variable checks
+npm run build:prod
+```
+
+The enhanced build script (`build:prod`) will:
 - Check for required environment variables
 - Build the project with production optimizations
 - Output the build to the `dist` directory
-- Provide statistics about the build
+- Provide statistics about the build size
 
-### 3. Test Netlify Deployment Locally
+### Deployment
 
-Before deploying to Netlify, you can test the build process locally:
+This project includes custom scripts for Netlify deployment:
 
 ```bash
+# Test Netlify deployment locally
 npm run netlify:test
-```
 
-This will:
-- Simulate the Netlify environment
-- Check for required configuration files
-- Run the build command specified in netlify.toml
-- Report any errors that might occur during deployment
-
-### 4. Deploy your website
-
-You can deploy your website to any of the following services:
-
-- **Netlify**: Easy deployment with continuous integration (recommended)
-- **Vercel**: Great for React applications with serverless functions
-- **GitHub Pages**: Free hosting for static websites
-- **Cloudflare Pages**: Fast global CDN with free hosting
-
-#### Deploying to Netlify
-
-**Option 1: Using the Deployment Helper Script (Recommended)**
-
-This project includes a helper script that automates the Netlify deployment process:
-
-```bash
+# Deploy to Netlify
 npm run netlify:deploy
 ```
 
-This script will:
-1. Check if Netlify CLI is installed and install it if needed
-2. Verify your Netlify login status and prompt you to log in if needed
-3. Build your project for production
-4. Guide you through deploying to Netlify with interactive prompts
-5. Remind you to set up environment variables in the Netlify dashboard
+#### Deployment Options
 
-**Option 2: Manual Deployment via Netlify Dashboard**
+1. **Netlify** (Recommended)
+   - Use the included helper script: `npm run netlify:deploy`
+   - Or connect your GitHub repository to Netlify for continuous deployment
 
-1. Create a Netlify account at [netlify.com](https://www.netlify.com)
-2. Push your code to a Git repository (GitHub, GitLab, or Bitbucket)
-3. In the Netlify dashboard, click "New site from Git"
-4. Choose your Git provider and select your repository
-5. Netlify will automatically detect your build settings from netlify.toml
-6. Add your environment variables in the Netlify dashboard:
-   - Go to Site settings > Build & deploy > Environment
-   - Add all variables from your .env file
-7. Click "Deploy site"
+2. **Vercel**
+   - Great alternative for React applications
+   - Provides serverless functions if needed
 
-**Option 3: Manual Deployment via Netlify CLI**
+3. **GitHub Pages**
+   - Free hosting for static websites
+   - Works well with this portfolio site
 
-1. Install the Netlify CLI:
-   ```bash
-   npm install -g netlify-cli
-   ```
-2. Login to your Netlify account:
-   ```bash
-   netlify login
-   ```
-3. Initialize your site:
-   ```bash
-   netlify init
-   ```
-4. Deploy your site:
-   ```bash
-   netlify deploy --prod
-   ```
+4. **Cloudflare Pages**
+   - Fast global CDN with free hosting
 
-#### Deploying to Vercel
+## Customization Guide
 
-1. Create a Vercel account at [vercel.com](https://vercel.com)
-2. Install the Vercel CLI:
-   ```bash
-   npm install -g vercel
-   ```
-3. Deploy your site:
-   ```bash
-   vercel
+### Personalizing Your Portfolio
+
+1. **Profile Information**
+   - Update personal details in `src/components/Hero.tsx`
+   - Replace profile image in `src/assets/profile.png`
+
+2. **Projects**
+   - Edit the `projects` array in `src/components/Projects.tsx`:
+   ```typescript
+   const projects: Project[] = [
+     {
+       id: '1',
+       title: 'Your Project Title',
+       description: 'Short description of your project',
+       date: 'Month Year',
+       readmeContent: `# Project Title
+       
+   ## Overview
+   Project description...`,
+       imageUrl: '/images/projects/your-project-image.jpg',
+       technologies: ['Tech1', 'Tech2', 'Tech3'],
+       githubUrl: 'https://github.com/yourusername/your-project',
+       demoUrl: 'https://your-project-demo.com'
+     },
+     // Add more projects...
+   ];
    ```
 
-## Customization
+3. **Services**
+   - Modify the services section in `src/components/Hero.tsx`
+   - Each service card can be customized with different icons, colors, and descriptions
 
-### Adding Your Projects
+4. **Career Path**
+   - Update your career and education timeline in `src/components/Path.tsx`
 
-Edit the `projects` array in `src/components/Projects.tsx` to add your own projects:
+5. **Contact Form**
+   - Customize form fields in `src/components/Contact.tsx`
+   - Ensure your EmailJS template variables match the form field names
 
-```typescript
-const projects: Project[] = [
-  {
-    id: '1',
-    title: 'Your Project Title',
-    description: 'Short description of your project',
-    date: 'Month Year',
-    readmeContent: `# Project Title
-    
-## Overview
-Project description...`,
-    imageUrl: '/images/projects/your-project-image.jpg',
-    technologies: ['Tech1', 'Tech2', 'Tech3'],
-    githubUrl: 'https://github.com/yourusername/your-project',
-    demoUrl: 'https://your-project-demo.com'
-  },
-  // Add more projects...
-];
-```
+### Styling
 
-### Customizing Services
+- The project uses Tailwind CSS for styling
+- Main color scheme and design elements can be adjusted in `tailwind.config.js`
+- Background effects can be modified in `src/components/Background.tsx`
 
-Edit the services section in `src/components/Hero.tsx` to showcase your own services.
+## Features In-Depth
+
+### Interactive Project Timeline
+
+The project showcase features a horizontal timeline with interactive project cards. Clicking on a project opens a modal with:
+- Project title and description
+- Technologies used
+- GitHub and demo links
+- Full README content rendered with Markdown
+
+### Service Request System
+
+The services section includes interactive cards that:
+- Display service information
+- Show an overlay on hover with a "Request Service" button
+- Automatically populate the contact form with the selected service
+
+### Contact Form with Dual Storage
+
+The contact form implements a robust submission system:
+- Sends an email notification via EmailJS
+- Stores the message in Supabase for future reference
+- Includes form validation and error handling
+- Features Terms of Service integration
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- React and TypeScript communities for excellent documentation
+- Tailwind CSS for streamlined styling capabilities
+- Framer Motion for powerful animation tools
+- Supabase for providing a robust backend solution
+- EmailJS for reliable email integration
